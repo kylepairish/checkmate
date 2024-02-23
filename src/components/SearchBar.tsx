@@ -7,12 +7,18 @@ import RequestBox from './RequestBox';
 
 const SearchBar = () => {
     const [query, setQuery] = useState<string>('');
+    const [method, setMethod] = useState('GET');
     const [responseData, setResponseData] = useState();
     const [error, setError] = useState<string | null>(null);
     const [history, setHistory] = useState<IAPICall[]>([]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
+    };
+
+    const handleMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setMethod(event.target.value);
+
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,6 +38,13 @@ const SearchBar = () => {
         <>  
             <div className="flex flex-col items-center justify-center">
                 <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-md w-1/2 md:w-1/2 flex items-center mt-10">
+                <select name="method" value={method} onChange={handleMethodChange} className="bg-purple-500 hover:bg-purple-300 py-2 mr-2 text-center rounded-md">
+                    <option value="GET">GET</option>
+                    <option value="PUT">PUT</option>
+                    <option value="POST">POST</option>
+                    <option value="UPDATE">UPDATE</option>
+                    <option value="DELETE">DELETE</option>
+                </select> 
                     <input 
                         name="query" 
                         value={query} 

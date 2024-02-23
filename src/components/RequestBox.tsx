@@ -15,6 +15,11 @@ const RequestBox = () => {
     setHeaders([...headers, { key: '', value: '' }]);
   };
 
+  const handleRemoveHeader = () => {
+    const updateHeaders = [...headers.slice(0, -1)];
+    setHeaders(updateHeaders);
+  }
+
   const handleHeaderChange = (index: number, field: string, value: string) => {
     const newHeaders = [...headers];
     newHeaders[index][field] = value;
@@ -43,7 +48,7 @@ const RequestBox = () => {
         <div className="flex mb-4">
           <button
             className={`flex-grow px-4 py-2 ${
-              activeTab === 'Headers' ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'
+              activeTab === 'Headers' ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300 hover:text-white'
             }`}
             onClick={() => handleTabClick('Headers')}
           >
@@ -51,7 +56,7 @@ const RequestBox = () => {
           </button>
           <button
             className={`flex-grow px-4 py-2 ${
-              activeTab === 'Query Params' ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'
+              activeTab === 'Query Params' ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300 hover:text-white'
             }`}
             onClick={() => handleTabClick('Query Params')}
           >
@@ -59,7 +64,7 @@ const RequestBox = () => {
           </button>
           <button
             className={`flex-grow px-4 py-2 ${
-              activeTab === 'Request Body' ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'
+              activeTab === 'Request Body' ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300 hover:text-white'
             }`}
             onClick={() => handleTabClick('Request Body')}
           >
@@ -76,14 +81,14 @@ const RequestBox = () => {
                 <input
                   type="text"
                   className="bg-gray-700 w-1/2 p-2 rounded-md text-white mr-2"
-                  placeholder="Key"
+                  placeholder={`Header ${index + 1}`}
                   value={header.key}
                   onChange={(e) => handleHeaderChange(index, 'key', e.target.value)}
                 />
                 <input
                   type="text"
                   className="bg-gray-700 w-1/2 p-2 rounded-md text-white"
-                  placeholder="Value"
+                  placeholder={`Value ${index + 1}`}
                   value={header.value}
                   onChange={(e) => handleHeaderChange(index, 'value', e.target.value)}
                 />
@@ -92,6 +97,10 @@ const RequestBox = () => {
             <button className="bg-purple-500 hover:bg-purple-300 px-4 py-2 rounded-md" onClick={handleAddHeader}>
               Add Header
             </button>
+            <button className="bg-red-500 hover:bg-red-300 px-4 py-2 ml-2 rounded-md" onClick={handleRemoveHeader}>
+              Remove Header
+            </button>
+
           </div>
         )}
 
@@ -102,14 +111,14 @@ const RequestBox = () => {
                 <input
                   type="text"
                   className="bg-gray-700 w-1/2 p-2 rounded-md text-white mr-2"
-                  placeholder="Key"
+                  placeholder={`Parameter ${index + 1}`}
                   value={param.key}
                   onChange={(e) => handleQueryParamChange(index, 'key', e.target.value)}
                 />
                 <input
                   type="text"
                   className="bg-gray-700 w-1/2 p-2 rounded-md text-white"
-                  placeholder="Value"
+                  placeholder={`Value ${index + 1}`}
                   value={param.value}
                   onChange={(e) => handleQueryParamChange(index, 'value', e.target.value)}
                 />
