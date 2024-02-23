@@ -11,7 +11,7 @@ export interface APICall {
 
 export interface CollectionsProps {
     collection: APICall[];
-    setSearchQuery: (value: string) => void;
+    setQuery: (value: string) => void;
 }
 
 export interface KeyValue {

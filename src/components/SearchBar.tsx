@@ -47,7 +47,7 @@ const SearchBar = () => {
                 <ResponseBox responseData={responseData} error={error} />
             </div>
             <div className="mt-4">
-                <Collections collection={history} setSearchQuery={setQuery} />
+                <Collections collection={history} setQuery={setQuery} />
             </div>
         </>
     );

@@ -1,8 +1,8 @@
 import { CollectionsProps } from "../interfaces";
 
-const Collections = ({ collection, setSearchQuery }: CollectionsProps) => {
+const Collections = ({ collection, setQuery }: CollectionsProps) => {
     const handleClick = (query: string) => {
-        setSearchQuery(query);
+        setQuery(query);
     };
     return (
         <div className="sidebar">
