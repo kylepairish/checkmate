@@ -1,6 +1,6 @@
-import { CollectionsProps } from "../interfaces";
+import { ICollectionsProps } from "../interfaces";
 
-const Collections = ({ collection, setQuery }: CollectionsProps) => {
+const Collections = ({ collection, setQuery }: ICollectionsProps) => {
     const handleClick = (query: string) => {
         setQuery(query);
     };

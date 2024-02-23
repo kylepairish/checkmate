@@ -1,19 +1,20 @@
-export interface ResponseBoxProps {
+export interface IResponseBoxProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     responseData: any;
     error: string | null;
 }
 
-export interface APICall {
+export interface IAPICall {
     query: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     responseData: any;
 }
 
-export interface CollectionsProps {
-    collection: APICall[];
+export interface ICollectionsProps {
+    collection: IAPICall[];
     setQuery: (value: string) => void;
 }
 
-export interface KeyValue {
+export interface IKeyValue {
     [key: string]: string;
 }

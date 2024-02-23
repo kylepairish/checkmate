@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ResponseBox from "./ResponseBox";
-import { APICall } from '../interfaces';
+import { IAPICall } from '../interfaces';
 import Collections from './Collections';
 import RequestBox from './RequestBox';
 
@@ -9,7 +9,7 @@ const SearchBar = () => {
     const [query, setQuery] = useState<string>('');
     const [responseData, setResponseData] = useState();
     const [error, setError] = useState<string | null>(null);
-    const [history, setHistory] = useState<APICall[]>([]);
+    const [history, setHistory] = useState<IAPICall[]>([]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);

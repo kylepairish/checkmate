@@ -1,7 +1,7 @@
-import { ResponseBoxProps } from '../interfaces';
+import { IResponseBoxProps } from '../interfaces';
 
 
-const ResponseBox = ({ responseData, error }: ResponseBoxProps) => {
+const ResponseBox = ({ responseData, error }: IResponseBoxProps) => {
     let responseText = "";
 
     if (error) {

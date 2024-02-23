@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { KeyValue } from '../interfaces';
+import { IKeyValue } from '../interfaces';
 
 const RequestBox = () => {
   const [activeTab, setActiveTab] = useState<string>('Headers');
-  const [headers, setHeaders] = useState<KeyValue[]>([{ key: '', value: '' }]);
-  const [queryParams, setQueryParams] = useState<KeyValue[]>([{ key: '', value: '' }]);
+  const [headers, setHeaders] = useState<IKeyValue[]>([{ key: '', value: '' }]);
+  const [queryParams, setQueryParams] = useState<IKeyValue[]>([{ key: '', value: '' }]);
   const [body, setBody] = useState<string>('');
 
   const handleTabClick = (tabName: string) => {
