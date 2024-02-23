@@ -14,6 +14,7 @@ const ResponseBox = ({ responseData, error }: ResponseBoxProps) => {
     return (
         <div className="flex justify-center">
             <div className="w-1/2 md:w-1/2 bg-gray-800 p-4 rounded-md">
+                <h1 className="text-white text-2xl mb-4">Response Body</h1>
                 <textarea 
                     name="content" 
                     rows={10} 

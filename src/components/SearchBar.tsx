@@ -3,6 +3,7 @@ import axios from 'axios';
 import ResponseBox from "./ResponseBox";
 import { APICall } from '../interfaces';
 import Collections from './Collections';
+import RequestBox from './RequestBox';
 
 const SearchBar = () => {
     const [query, setQuery] = useState<string>('');
@@ -17,7 +18,7 @@ const SearchBar = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.get(query);
+            const response = await axios.get(`http://localhost:5000/api/call-external-api?url=${query}`);
             setResponseData(response.data);
             setHistory(prevHistory => [...prevHistory, { query, responseData: response.data }]);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,9 +29,9 @@ const SearchBar = () => {
     };
 
     return (
-        <>
-            <div className="flex flex-col items-center justify-center mt-10">
-                <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-md w-2/3 md:w-1/3 flex items-center">
+        <>  
+            <div className="flex flex-col items-center justify-center">
+                <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-md w-1/2 md:w-1/2 flex items-center mt-10">
                     <input 
                         name="query" 
                         value={query} 
@@ -41,6 +42,7 @@ const SearchBar = () => {
                     <button type="submit" className="bg-purple-500 hover:bg-purple-300 px-4 py-2 rounded-md">Search</button>
                 </form>
             </div>
+            <RequestBox />
             <div className="mt-4">
                 <ResponseBox responseData={responseData} error={error} />
             </div>
