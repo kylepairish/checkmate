@@ -1,6 +1,7 @@
 export interface IResponseBoxProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     responseData: any;
+    responseStatus: any;
     error: string | null;
 }
 

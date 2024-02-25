@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import axios from 'axios';
+import axios, { AxiosError, HttpStatusCode } from 'axios';
 import cors from 'cors';
 
 const app = express();
@@ -11,20 +11,41 @@ app.use(cors())
 app.use(express.json());
 
 // Define API endpoint for handling API calls
-app.get('/api/call-external-api', async (req: Request, res: Response) => {
+app.all('/', async (req: Request, res: Response) => {
     const { url } = req.query;
 
-    try {
-        // Make the actual API call to the external API
-        const response = await axios.get(url as string);
+    const method = req.method.toUpperCase();
 
-        // Return the data received from the external API to the frontend
-        res.json(response.data);
-    } catch (error) {
-        // If there's an error, return an error response
-        res.status(500).json({ error: 'Failed to fetch data from external API' });
-    }
-});
+    try {
+        let response;
+
+        switch (method) {
+            case 'GET':
+                response = await axios.get(url as string);
+                break;
+            case 'POST':
+                response = await axios.post(url as string, req.body);
+                break;
+            case 'PUT':
+                response = await axios.put(url as string, req.body);
+                break;
+            case 'UPDATE':
+                response = await axios.patch(url as string, req.body);
+                break;
+            case 'DELETE':
+                response = await axios.delete(url as string);
+                break;
+            default: throw new Error('Invalid HTTP method');
+        }
+            const responseData = response.data;
+            const responseStatus = response.status;
+    
+            // Send only the data and status code to the client
+            res.json({ data: responseData, status: responseStatus });
+    } catch (error: any) {
+        console.log(error);
+}});
+
 
 // Start the server
 app.listen(PORT, () => {

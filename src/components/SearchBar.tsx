@@ -9,6 +9,7 @@ const SearchBar = () => {
     const [query, setQuery] = useState<string>('');
     const [method, setMethod] = useState('GET');
     const [responseData, setResponseData] = useState();
+    const [responseStatus, setResponseStatus] = useState();
     const [error, setError] = useState<string | null>(null);
     const [history, setHistory] = useState<IAPICall[]>([]);
 
@@ -18,14 +19,34 @@ const SearchBar = () => {
 
     const handleMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       setMethod(event.target.value);
-
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.get(`http://localhost:5000/api/call-external-api?url=${query}`);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          let response: any;
+          switch (method) {
+            case 'GET':
+              response = await axios.get(`http://localhost:5000/?url=${query}`);
+              break;
+            case 'POST':
+              response = await axios.post(`http://localhost:5000/`, { url: query});
+              break;
+            case 'PUT':
+              response = await axios.put(`http://localhost:5000/`, {url: query});
+              break;
+            case 'UPDATE':
+              response = await axios.patch(`http://localhost:5000/`, { url: query});
+              break;
+            case 'DELETE':
+              response = await axios.delete(`http://localhost:5000/`, {url: query});
+              break;
+            default:
+              throw new Error('Invalid method selected');
+          }
             setResponseData(response.data);
+            setResponseStatus(response.status);
             setHistory(prevHistory => [...prevHistory, { query, responseData: response.data }]);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
@@ -57,7 +78,7 @@ const SearchBar = () => {
             </div>
             <RequestBox />
             <div className="mt-4">
-                <ResponseBox responseData={responseData} error={error} />
+                <ResponseBox responseData={responseData} responseStatus={responseStatus} error={error} />
             </div>
             <div className="mt-4">
                 <Collections collection={history} setQuery={setQuery} />
