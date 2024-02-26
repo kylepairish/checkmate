@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IKeyValue } from '../interfaces';
 
-const RequestBox = () => {
+const RequestBox = ({onChildData}) => {
   const [activeTab, setActiveTab] = useState<string>('Headers');
   const [headers, setHeaders] = useState<IKeyValue[]>([{ key: '', value: '' }]);
   const [queryParams, setQueryParams] = useState<IKeyValue[]>([{ key: '', value: '' }]);
@@ -38,6 +38,7 @@ const RequestBox = () => {
 
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBody(e.target.value);
+    onChildData(e.target.value);
   };
 
 

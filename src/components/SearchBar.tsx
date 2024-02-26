@@ -12,6 +12,12 @@ const SearchBar = () => {
     const [responseStatus, setResponseStatus] = useState();
     const [error, setError] = useState<string | null>(null);
     const [history, setHistory] = useState<IAPICall[]>([]);
+    const [childData, setChildData] = useState('');
+
+    const handleChildData = (dataFromChild) => {
+      setChildData(dataFromChild);
+      console.log(dataFromChild);
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
@@ -31,7 +37,8 @@ const SearchBar = () => {
               response = await axios.get(`http://localhost:5000/?url=${query}`);
               break;
             case 'POST':
-              response = await axios.post(`http://localhost:5000/`, { url: query});
+              response = await axios.post(`http://localhost:5000/`, { url: query, childData});
+              console.log(childData);
               break;
             case 'PUT':
               response = await axios.put(`http://localhost:5000/`, {url: query});
@@ -76,7 +83,7 @@ const SearchBar = () => {
                     <button type="submit" className="bg-purple-500 hover:bg-purple-300 px-4 py-2 rounded-md">Search</button>
                 </form>
             </div>
-            <RequestBox />
+            <RequestBox onChildData={handleChildData} />
             <div className="mt-4">
                 <ResponseBox responseData={responseData} responseStatus={responseStatus} error={error} />
             </div>
