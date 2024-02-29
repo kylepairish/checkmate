@@ -7,7 +7,7 @@ import RequestBox from './RequestBox';
 
 const SearchBar = () => {
     const [query, setQuery] = useState<string>('');
-    const [method, setMethod] = useState('');
+    const [method, setMethod] = useState('GET');
     const [responseData, setResponseData] = useState();
     const [responseStatus, setResponseStatus] = useState();
     const [error, setError] = useState<string | null>(null);
