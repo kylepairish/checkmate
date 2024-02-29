@@ -5,6 +5,10 @@ export interface IResponseBoxProps {
     error: string | null;
 }
 
+//export interface IRequestBoxProps {
+    //body
+//}
+
 export interface IAPICall {
     query: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -20,6 +20,11 @@ const RequestBox = ({onChildData}) => {
     setHeaders(updateHeaders);
   }
 
+  const handleRemoveQuery = () => {
+    const updateQuery = [...queryParams.slice(0, -1)];
+    setQueryParams(updateQuery);
+  }
+
   const handleHeaderChange = (index: number, field: string, value: string) => {
     const newHeaders = [...headers];
     newHeaders[index][field] = value;
@@ -127,6 +132,9 @@ const RequestBox = ({onChildData}) => {
             ))}
             <button className="bg-purple-500 hover:bg-purple-300 px-4 py-2 rounded-md" onClick={handleAddQueryParam}>
               Add Query Param
+            </button>
+            <button className="bg-red-500 hover:bg-red-300 px-4 py-2 ml-2 rounded-md" onClick={handleRemoveQuery}>
+              Remove Query
             </button>
           </div>
         )}

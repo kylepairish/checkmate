@@ -7,7 +7,7 @@ import RequestBox from './RequestBox';
 
 const SearchBar = () => {
     const [query, setQuery] = useState<string>('');
-    const [method, setMethod] = useState('GET');
+    const [method, setMethod] = useState('');
     const [responseData, setResponseData] = useState();
     const [responseStatus, setResponseStatus] = useState();
     const [error, setError] = useState<string | null>(null);
@@ -16,7 +16,6 @@ const SearchBar = () => {
 
     const handleChildData = (dataFromChild: React.SetStateAction<string>) => {
       setChildData(dataFromChild);
-      console.log(dataFromChild);
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +37,6 @@ const SearchBar = () => {
               break;
             case 'POST':
               response = await axios.post(query, {childData});
-              console.log(childData);
               break;
             case 'PUT':
               response = await axios.put(query);
