@@ -14,7 +14,7 @@ const SearchBar = () => {
     const [history, setHistory] = useState<IAPICall[]>([]);
     const [childData, setChildData] = useState('');
 
-    const handleChildData = (dataFromChild) => {
+    const handleChildData = (dataFromChild: React.SetStateAction<string>) => {
       setChildData(dataFromChild);
       console.log(dataFromChild);
     };
@@ -34,20 +34,20 @@ const SearchBar = () => {
           let response: any;
           switch (method) {
             case 'GET':
-              response = await axios.get(`http://localhost:5000/?url=${query}`);
+              response = await axios.get(query);
               break;
             case 'POST':
-              response = await axios.post(`http://localhost:5000/`, { url: query, childData});
+              response = await axios.post(query, {childData});
               console.log(childData);
               break;
             case 'PUT':
-              response = await axios.put(`http://localhost:5000/`, {url: query});
+              response = await axios.put(query);
               break;
             case 'UPDATE':
-              response = await axios.patch(`http://localhost:5000/`, { url: query});
+              response = await axios.patch(query);
               break;
             case 'DELETE':
-              response = await axios.delete(`http://localhost:5000/`, {url: query});
+              response = await axios.delete(query);
               break;
             default:
               throw new Error('Invalid method selected');
